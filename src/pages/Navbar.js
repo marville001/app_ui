@@ -6,19 +6,19 @@ import Button from "@material-ui/core/button";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../_actions/userActions";
+import { AppBar, Grid, Toolbar } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "white",
-    width: "100%",
-    height: "10vh",
-    display: "flex",
-    alignItems: "center",
+    // width: "100%",
+    // height: "10vh",
+    // display: "flex",
     position: "fixed",
-    boxShadow: "0 0 5px grey",
+    transform: "translateZ(0)",
   },
   title: {
-    color: "inherit",
+    color: "#000",
     flexGrow: 3,
     paddingLeft: "7%",
     fontSize: "30px",
@@ -55,46 +55,55 @@ export default function ButtonAppBar() {
   const dispatch = useDispatch();
 
   return (
-    <div className={classes.root}>
-      <div className={classes.title}>
-        {user.id ? (
-          <Link to="/feeds" className={classes.link}>
-            Spende
-          </Link>
-        ) : (
-          "Spende"
-        )}
-      </div>
-      <div className={classes.login}>
-        {user.id ? (
-          <Button
-            variant="contained"
-            color="primary"
-            style={{
-              textTransform: "lowercase",
-              fontFamily: "Syne",
-              fontSize: "15px",
-            }}
-            onClick={() => dispatch(userLogout())}
-          >
-            Logout
-          </Button>
-        ) : (
-          <Link to="/auth/login" className={classes.link}>
-            <Button
-              variant="contained"
-              color="primary"
-              style={{
-                textTransform: "lowercase",
-                fontFamily: "Syne",
-                fontSize: "15px",
-              }}
-            >
-              login
-            </Button>
-          </Link>
-        )}
-      </div>
-    </div>
+    <AppBar className={classes.root} position="static">
+      <Toolbar>
+        <Grid container alignItems="center">
+          <Grid item>
+            <div className={classes.title}>
+              {user.id ? (
+                <Link to="/feeds" className={classes.link}>
+                  Spende
+                </Link>
+              ) : (
+                "Spende"
+              )}
+            </div>
+          </Grid>
+          <Grid item sm></Grid>
+          <Grid item>
+            <div className={classes.login}>
+              {user.id ? (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{
+                    textTransform: "lowercase",
+                    fontFamily: "Syne",
+                    fontSize: "15px",
+                  }}
+                  onClick={() => dispatch(userLogout())}
+                >
+                  Logout
+                </Button>
+              ) : (
+                <Link to="/auth/login" className={classes.link}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    style={{
+                      textTransform: "lowercase",
+                      fontFamily: "Syne",
+                      fontSize: "15px",
+                    }}
+                  >
+                    login
+                  </Button>
+                </Link>
+              )}
+            </div>
+          </Grid>
+        </Grid>
+      </Toolbar>
+    </AppBar>
   );
 }

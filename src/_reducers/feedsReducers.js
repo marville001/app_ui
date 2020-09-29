@@ -13,7 +13,7 @@ const feedsReducer = (state = { feeds: [], feed: {} }, action) => {
       return {
         ...state,
         feedsloading: false,
-        feeds: state.feeds.push(action.feed),
+        feeds: [...state.feeds, action.feed],
       };
     case FETCH_FEEDS_REQUEST:
       return { ...state, feedsloading: true };

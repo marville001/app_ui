@@ -28,12 +28,13 @@ export default function FeedDetails(props) {
         style={{
           display: "flex",
           height: "90vh",
+          width: "100%",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <h2>Loading....</h2>
+        <h2 style={{ textAlign: "center" }}>Loading....</h2>
       </div>
     );
   }
@@ -44,6 +45,7 @@ export default function FeedDetails(props) {
         style={{
           display: "flex",
           height: "90vh",
+          width: "100%",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
@@ -59,7 +61,14 @@ export default function FeedDetails(props) {
   }
 
   return (
-    <div style={{ display: "flex", paddingTop: "10vh", height: "90vh" }}>
+    <div
+      style={{
+        display: "flex",
+        margin: "auto",
+        paddingTop: "10vh",
+        height: "90vh",
+      }}
+    >
       <div
         style={{
           width: "50%",
@@ -70,7 +79,7 @@ export default function FeedDetails(props) {
         }}
       >
         <img
-          src="../picture.svg"
+          src={feed.image}
           alt="here"
           style={{
             width: "80%",

@@ -1,27 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import Search from "../components/Search.js";
-import AddFeeds from "../components/AddFeeds.js";
 
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Divider from "@material-ui/core/Divider";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
-import IconButton from "@material-ui/core/IconButton";
+import AddIcon from "@material-ui/icons/Add";
 
 import NumberFormat from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteFeed, fetchFeeds } from "../_actions/feedsActions.js";
 import { Link } from "react-router-dom";
+import AddFeed from "../components/AddFeed.jsx";
+import {
+  Fab,
+  List,
+  ListItem,
+  Divider,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+  Typography,
+  IconButton,
+} from "@material-ui/core";
 
 export default function Feeds(props) {
   const { user } = useSelector((state) => state.users);
   const { feeds, feedsloading } = useSelector((state) => state.feeds);
   const dispatch = useDispatch();
+
+  const [openPopup, setOpenPopup] = useState(false);
 
   useEffect(() => {
     dispatch(fetchFeeds());
@@ -43,6 +49,7 @@ export default function Feeds(props) {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
+          width: "100%",
         }}
       >
         <h2>Loading....</h2>
@@ -51,14 +58,14 @@ export default function Feeds(props) {
   }
 
   return (
-    <div style={{ paddingTop: "10vh" }}>
-      <AddFeeds />
+    <div style={{ marginTop: "70px", width: "100%" }}>
+      {/* <AddFeeds /> */}
+
       <Search />
       <div
         style={{
-          marginLeft: "25%",
-          width: "50%",
-          marginTop: "60px",
+          width: "500px",
+          margin: "auto",
         }}
       >
         <List>
@@ -109,6 +116,10 @@ export default function Feeds(props) {
                   <IconButton
                     onClick={() => dispatch(deleteFeed(feed.id))}
                     aria-label="delete"
+                    style={{
+                      display: user.id === feed.authorId ? "block" : "none",
+                    }}
+                    // disabled={user.id === feed.authorId ? false : true}
                   >
                     <DeleteIcon />
                   </IconButton>
@@ -119,6 +130,27 @@ export default function Feeds(props) {
             ))}
         </List>
       </div>
+      <div
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          right: "20px",
+          borderRadius: "50%",
+        }}
+      >
+        <Fab
+          onClick={() => setOpenPopup(true)}
+          color="primary"
+          aria-label="add"
+        >
+          <AddIcon />
+        </Fab>
+      </div>
+      <AddFeed
+        openPopup={openPopup}
+        setOpenPopup={setOpenPopup}
+        title="Add Feed"
+      />
     </div>
   );
 }

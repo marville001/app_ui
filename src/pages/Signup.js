@@ -33,16 +33,15 @@ export default function Signup(props) {
 
   const hangleSignUp = (e) => {
     e.preventDefault();
-    dispatch(userSignUp({ id: values.email, ...values }));
+    if (values.email.length > 5)
+      dispatch(userSignUp({ id: values.email, ...values }));
   };
 
   return (
-    <div style={{ width: "40%" }}>
+    <div style={{ maxWidth: "400px", margin: "auto", marginTop: "70px" }}>
       <h2
         style={{
-          paddingTop: "30px",
           textAlign: "center",
-          width: "100%",
           fontFamily: "syne",
           color: "grey",
         }}

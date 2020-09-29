@@ -33,30 +33,23 @@ const Login = (props) => {
   };
 
   return (
-    <div style={{ width: "40%" }}>
+    <div style={{ maxWidth: "400px", margin: "auto", marginTop: "70px" }}>
       <h2
         style={{
-          paddingTop: "30px",
           textAlign: "center",
-          width: "100%",
           fontFamily: "syne",
           color: "grey",
         }}
       >
         Sign In
       </h2>
-      <div
-        style={{
-          marginLeft: "15%",
-          width: "70%",
-        }}
-      >
+      <div>
         <form>
           <TextField
             variant="outlined"
             margin="normal"
-            // required
-            // fullWidth
+            required
+            fullWidth
             id="email"
             label="Email Address"
             name="email"
